@@ -1,17 +1,31 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom/client'; // Correct import
 import './index.css';
+import { PrivyProvider } from '@privy-io/react-auth';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+const privyConfig = {
+  appId: 'clw7bcjee07h5tq011ihw54pf', // Replace with your Privy app ID
+  config: {
+    appearance: {
+      theme: 'light',
+      accentColor: '#676FFF',
+      logo: 'https://your-logo-url',
+    },
+    embeddedWallets: {
+      createOnLogin: 'users-without-wallets',
+    },
+  },
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <PrivyProvider {...privyConfig}>
+      <App />
+    </PrivyProvider>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
